@@ -54,13 +54,16 @@ eksctl create iamserviceaccount --cluster=eksdemo1 --namespace=kube-system --nam
 eksctl  get iamserviceaccount --cluster eksdemo1
 ```
 
+
+
 ## Step-03: Install the AWS Load Balancer Controller using Helm V3 
 ### Step-03-01: Install Helm
+just click here for windows: https://get.helm.sh/helm-v3.14.2-windows-amd64.zip
 - [Install Helm](https://helm.sh/docs/intro/install/) if not installed
 - [Install Helm for AWS EKS](https://docs.aws.amazon.com/eks/latest/userguide/helm.html)
 
 ```
-just click here for windows: Windows amd64
+
 
 ### Step-03-02: Install AWS Load Balancer Controller
 
