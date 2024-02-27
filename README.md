@@ -59,6 +59,9 @@ eksctl  get iamserviceaccount --cluster eksdemo1
 - [Install Helm](https://helm.sh/docs/intro/install/) if not installed
 - [Install Helm for AWS EKS](https://docs.aws.amazon.com/eks/latest/userguide/helm.html)
 
+```
+just click here for windows: Windows amd64
+
 ### Step-03-02: Install AWS Load Balancer Controller
 
 # Add the eks-charts repository.
@@ -69,8 +72,9 @@ helm repo update
 
 # Install the AWS Load Balancer Controller.
 ## Template
+```
 helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n kube-system --set clusterName=eksdemo1 --set serviceAccount.create=false --set serviceAccount.name=aws-load-balancer-controller --set region=us-east-1 --set vpcId=vpc-0165a396e41e292a3 --set image.repository=602401143452.dkr.ecr.us-east-1.amazonaws.com/amazon/aws-load-balancer-controller
-
+```
 ```
 
 
