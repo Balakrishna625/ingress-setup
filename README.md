@@ -96,6 +96,7 @@ metadata:
     ingressclass.kubernetes.io/is-default-class: "true"
 spec:
   controller: ingress.k8s.aws/alb
+```
 
 ## Step-07: Create IngressClass Resource
 ```t
@@ -107,6 +108,7 @@ kubectl get ingressclass
 
 # Describe IngressClass Resource
 kubectl describe ingressclass my-aws-ingress-class
+`````
 ```
 
 
