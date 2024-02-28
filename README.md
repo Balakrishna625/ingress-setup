@@ -110,11 +110,8 @@ kubectl get ingressclass
 kubectl describe ingressclass my-aws-ingress-class
 `````
 ```
-
-
-
+```
 ## Step-02: Review App1 Deployment kube-manifest
-- **File Location:** `01-kube-manifests-default-backend/01-Nginx-App1-Deployment-and-NodePortService.yml`
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -138,6 +135,8 @@ spec:
           ports:
             - containerPort: 80
 ```
+```
+```
 ## Step-03: Review App1 NodePort Service
 - **File Location:** `01-kube-manifests-default-backend/01-Nginx-App1-Deployment-and-NodePortService.yml`
 ```yaml
@@ -157,6 +156,8 @@ spec:
   ports:
     - port: 80
       targetPort: 80  
+````
+```
 ```
 
 ## Step-04: Review Ingress kube-manifest with Default Backend Option
