@@ -42,6 +42,10 @@ kubectl get sa aws-load-balancer-controller -n kube-system
 Obseravation:
 1. Nothing with name "aws-load-balancer-controller" should exist
 
+```
+```
+###Here majorly concentarte on changing cluster name and policy ARN
+```
 
 # Replaced name, cluster and policy arn (Policy arn we took note in step-02)
 eksctl create iamserviceaccount --cluster=eksdemo1 --namespace=kube-system --name=aws-load-balancer-controller --attach-policy-arn=arn:aws:iam::180789647333:policy/AWSLoadBalancerControllerIAMPolicy --override-existing-serviceaccounts --approve
