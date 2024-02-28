@@ -84,7 +84,6 @@ helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n ku
 
 
 ## Step-05: Ingress Class Concept
-## Review IngressClass Kubernetes Manifest
 
 - Understand in detail about annotation `ingressclass.kubernetes.io/is-default-class: "true"`
 ```yaml
@@ -160,9 +159,7 @@ spec:
 ```
 ```
 
-## Step-04: Review Ingress kube-manifest with Default Backend Option
-- [Annotations](https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/guide/ingress/annotations/)
-- **File Location:** `01-kube-manifests-default-backend/02-ALB-Ingress-Basic.yml`
+## Step-04: Create Ingress resource now
 ```yaml
 # Annotations Reference: https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/guide/ingress/annotations/
 apiVersion: networking.k8s.io/v1
@@ -185,96 +182,13 @@ spec:
 
 ## Step-05: Deploy kube-manifests and Verify
 ```t
-# Change Directory
-cd 08-02-ALB-Ingress-Basics
 
 # Deploy kube-manifests
-kubectl apply -f 01-kube-manifests-default-backend/
-
-# Verify k8s Deployment and Pods
-kubectl get deploy
-kubectl get pods
-
-# Verify Ingress (Make a note of Address field)
-kubectl get ingress
-Obsevation: 
-1. Verify the ADDRESS value, we should see something like "app1ingress-1334515506.us-east-1.elb.amazonaws.com"
-
-# Describe Ingress Controller
-kubectl describe ingress ingress-nginxapp1
-Observation:
-1. Review Default Backend and Rules
-
-# List Services
-kubectl get svc
-
-# Verify Application Load Balancer using 
-Goto AWS Mgmt Console -> Services -> EC2 -> Load Balancers
-1. Verify Listeners and Rules inside a listener
-2. Verify Target Groups
-
-# Access App using Browser
-kubectl get ingress
-http://<ALB-DNS-URL>
-http://<ALB-DNS-URL>/app1/index.html
-or
-http://<INGRESS-ADDRESS-FIELD>
-http://<INGRESS-ADDRESS-FIELD>/app1/index.html
-
-# Sample from my environment (for reference only)
-http://app1ingress-154912460.us-east-1.elb.amazonaws.com
-http://app1ingress-154912460.us-east-1.elb.amazonaws.com/app1/index.html
-
-# Verify AWS Load Balancer Controller logs
-kubectl get po -n kube-system 
-## POD1 Logs: 
-kubectl -n kube-system logs -f <POD1-NAME>
-kubectl -n kube-system logs -f aws-load-balancer-controller-65b4f64d6c-h2vh4
-##POD2 Logs: 
-kubectl -n kube-system logs -f <POD2-NAME>
-kubectl -n kube-system logs -f aws-load-balancer-controller-65b4f64d6c-t7qqb
-```
-
-```
-
-```yaml
-# Annotations Reference: https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/guide/ingress/annotations/
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: ingress-nginxapp1
-  labels:
-    app: app1-nginx
-  annotations:
-    # Load Balancer Name
-    alb.ingress.kubernetes.io/load-balancer-name: app1ingressrules
-    # Ingress Core Settings
-    alb.ingress.kubernetes.io/scheme: internet-facing
-spec:
-  ingressClassName: my-aws-ingress-class
-  rules:
-    - http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: app1-nginx-nodeport-service
-                port: 
-                  number: 80
-      
-
-# 1. If  "spec.ingressClassName: ic-external-lb" not specified, will reference default ingress class on this kubernetes cluster
-# 2. Default Ingress class is nothing but for which ingress class we have the annotation `ingressclass.kubernetes.io/is-default-class: "true"`
-```
-
-## Step-08: Deploy manifests and Verify
-```t
-
-# Deploy kube-manifests
-kubectl apply -f deploy.yaml
-kubectl apply -f svc.yaml
 kubectl apply -f ingress.yaml
+
+# Check the ingress resource
+kubectl get ingress
+
 
 
 
