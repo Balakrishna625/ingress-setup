@@ -76,20 +76,16 @@ helm repo update
 # Install the AWS Load Balancer Controller.
 ## Template
 ```
+```
 helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n kube-system --set clusterName=eksdemo1 --set serviceAccount.create=false --set serviceAccount.name=aws-load-balancer-controller --set region=us-east-1 --set vpcId=vpc-0165a396e41e292a3 --set image.repository=602401143452.dkr.ecr.us-east-1.amazonaws.com/amazon/aws-load-balancer-controller
+```
 ```
 ```
 
 
 ## Step-05: Ingress Class Concept
-- Understand what is Ingress Class 
-- Understand how it overrides the default deprecated annotation `#kubernetes.io/ingress.class: "alb"`
-- [Ingress Class Documentation Reference](https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/guide/ingress/ingress_class/)
-- [Different Ingress Controllers available today](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/)
+## Review IngressClass Kubernetes Manifest
 
-
-## Step-06: Review IngressClass Kubernetes Manifest
-- **File Location:** `08-01-Load-Balancer-Controller-Install/kube-manifests/01-ingressclass-resource.yaml`
 - Understand in detail about annotation `ingressclass.kubernetes.io/is-default-class: "true"`
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -101,19 +97,13 @@ metadata:
 spec:
   controller: ingress.k8s.aws/alb
 
-## Additional Note
-# 1. You can mark a particular IngressClass as the default for your cluster. 
-# 2. Setting the ingressclass.kubernetes.io/is-default-class annotation to true on an IngressClass resource will ensure that new Ingresses without an ingressClassName field specified will be assigned this default IngressClass.  
-# 3. Reference: https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.3/guide/ingress/ingress_class/
-```
-
 ## Step-07: Create IngressClass Resource
 ```t
 # Navigate to Directory
 cd 08-01-Load-Balancer-Controller-Install
 
 # Create IngressClass Resource
-kubectl apply -f kube-manifests
+kubectl apply -f ingress-class.yaml
 
 # Verify IngressClass Resource
 kubectl get ingressclass
@@ -122,9 +112,6 @@ kubectl get ingressclass
 kubectl describe ingressclass my-aws-ingress-class
 ```
 
-## References
-- [AWS Load Balancer Controller Install](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html)
-- [ECR Repository per region](https://docs.aws.amazon.com/eks/latest/userguide/add-ons-images.html)
 
 
 
