@@ -99,9 +99,6 @@ spec:
 
 ## Step-07: Create IngressClass Resource
 ```t
-# Navigate to Directory
-cd 08-01-Load-Balancer-Controller-Install
-
 # Create IngressClass Resource
 kubectl apply -f ingress-class.yaml
 
