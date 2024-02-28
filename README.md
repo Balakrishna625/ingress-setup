@@ -146,8 +146,6 @@ metadata:
   labels:
     app: app1-nginx
   annotations:
-#Important Note:  Need to add health check path annotations in service level if we are planning to use multiple targets in a load balancer    
-#    alb.ingress.kubernetes.io/healthcheck-path: /app1/index.html
 spec:
   type: NodePort
   selector:
@@ -169,7 +167,6 @@ metadata:
   labels:
     app: app1-nginx
   annotations:
-    # Ingress Core Settings
     alb.ingress.kubernetes.io/scheme: internet-facing
 spec:
   ingressClassName: my-aws-ingress-class
